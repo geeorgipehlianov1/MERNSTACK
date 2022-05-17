@@ -1,13 +1,32 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
+import AuthContext from '../../context/auth/AuthContext';
+import AlertContext from '../../context/alert/AlertContext';
 
-const Login = () => {
+const Login = (props) => {
+    const alertContext = useContext(AlertContext);
+    const authContext = useContext(AuthContext);
     const [user, setUser] = useState({
         email: '',
         password: '',
     })
-    
-    const {name, email, password, password2} = user;
+
+    const { login, error, clearErrors, isAuthenticated } = authContext; 
+    const {setAlert} = alertContext;
+
+
+    const { email, password, } = user;
+    useEffect(() => {
+        if(isAuthenticated) {
+            props.history.push('/')
+        }
+
+        if(error === 'Invalid Credentials') {
+            setAlert(error, 'danger')
+            clearErrors();
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [error, isAuthenticated, props.history])
 
     const onChangeHandler = (e) => {
         setUser({...user, [e.target.name]: e.target.value})
@@ -16,7 +35,13 @@ const Login = () => {
     const onSubmitHandler = (e) => {
         e.preventDefault();
 
-        console.log('Login submit');
+        if(email === '' || password === '') {
+            setAlert('Please fill all fields')
+        } else {
+            console.log(email, password);
+            login({email, password});
+        }
+       
     }
 
 
