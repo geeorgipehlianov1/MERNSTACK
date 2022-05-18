@@ -6,6 +6,7 @@ export const CLEAR_CURRENT = 'CLEAR_CURRENT';
 export const UPDATE_CONTACT = 'UPDATE_CONTACT';
 export const CONTACT_ERROR = 'CONTACT_ERROR'
 export const CLEAR_CONTACTS = 'CLEAR_CONTACTS';
+export const FILTER_CONTCTS = 'FILTER_CONTCTS'
 export const CLEAR_FILTER = 'CLEAR_FILTER';
 export const SET_ALERT = 'SET_ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT';

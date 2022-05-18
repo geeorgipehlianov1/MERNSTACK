@@ -15,23 +15,9 @@ const Contacts = () => {
   }, []);
 
 
-  if(contacts.length === 0) {
-      return <h4>Please add a contact!</h4>
-  }
-
-  let hasFilter = false;
-  if(filtered !== null) {
-      hasFilter = true;
-  }
-
   return(
-    <>
-    <TransitionGroup>
-     {hasFilter === true 
-          ? filtered.map(contact => (<CSSTransition key={contact._id} timeout={1000} className='item'><ContactItem contact={contact} /></CSSTransition>))
-          : contacts.map(contact => (<CSSTransition key={contact._id} timeout={1000} className='item'><ContactItem contact={contact} /></CSSTransition>))
-    }
-    </TransitionGroup>   
+    <>    
+    {contacts && contacts.map(contact => (<ContactItem  key={contact._id} contact={contact} />))}
     </>
   ); 
 };

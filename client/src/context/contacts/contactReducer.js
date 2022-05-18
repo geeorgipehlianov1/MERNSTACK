@@ -5,6 +5,7 @@ import {
     CLEAR_CURRENT,
     UPDATE_CONTACT,
     CLEAR_CONTACTS,
+    FILTER_CONTCTS,
     CLEAR_FILTER,
     CONTACT_ERROR,
     GET_CONTACTS,
@@ -18,14 +19,16 @@ import {
         case GET_CONTACTS:
             return {...state, contacts: action.payload}
         case DELETE_CONTACT: 
-            return {...state, contacts: state.contacts.filter(c => c.id !== action.payload)}
+            return {...state, contacts: state.contacts.filter(c => c._id !== action.payload)}
         case SET_CURRENT: 
             return {...state, current: action.payload}
         case CLEAR_CURRENT: 
             return {...state, current: null}
-        case UPDATE_CONTACT: 
-            return {...state, contacts: state.contacts.map(contact => contact.id === action.payload.id ? action.payload : contact)}
         case CLEAR_CONTACTS: 
+            return {...state, contacts: [] }
+        case UPDATE_CONTACT: 
+            return {...state, contacts: state.contacts.map(contact => contact._id === action.payload._id ? action.payload : contact)}
+        case FILTER_CONTCTS: 
             return {...state, filtered: state.contacts.filter(contact => {
                 const regex = new RegExp(`${action.payload}`, 'gi')
                 return contact.name.match(regex) || contact.email.match(regex)

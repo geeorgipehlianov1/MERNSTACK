@@ -38,7 +38,6 @@ const Login = (props) => {
         if(email === '' || password === '') {
             setAlert('Please fill all fields')
         } else {
-            console.log(email, password);
             login({email, password});
         }
        
